@@ -33,7 +33,7 @@ public class MainView extends VerticalLayout {
 
     cfg = new QImgMkup.EditCfg();
     cfg.color = ColorRange.RED.colStr;
-    cfg.thicknessPx = 8;
+    cfg.thicknessPx = 4;
     cfg.editor = QImgMkup.Editor.FREEFORM;
     cfg.font_size = 30;
 
@@ -154,7 +154,7 @@ public class MainView extends VerticalLayout {
     qimgMkup = new QImgMkup();
     cfg = new QImgMkup.EditCfg();
     cfg.color = ColorRange.RED.colStr;
-    cfg.thicknessPx = 8;
+    cfg.thicknessPx = 4;
     cfg.editor = QImgMkup.Editor.FREEFORM;
     cfg.font_size = 30;
     qimgMkup.setEditCfg(cfg);
@@ -178,13 +178,13 @@ public class MainView extends VerticalLayout {
   private void launchCircleEditor() {
     System.out.println("launchCircleEditor ");
     setTitle("Circle Editor");
-    qimgMkup.addLiner();
+    qimgMkup.addCircler();
   }
 
   private void launchLineEditor() {
     System.out.println("launchLineEditor ");
     setTitle("Line Editor");
-    qimgMkup.addCircler();
+    qimgMkup.addLiner();
   }
 
   private void launchTextEditor() {

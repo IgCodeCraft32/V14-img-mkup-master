@@ -128,7 +128,7 @@ public class QImgMkup {
     }
 
     public Component getImgMkupEditor() {
-        String canvas = "<canvas id='drawContainer' style='width: 100%;height: 100%;'></canvas>";
+        String canvas = "<canvas id='drawContainer' ></canvas>";
         imgDiv = new Div();
         if (dimension == null) {
             imgDiv.setWidth("1px");

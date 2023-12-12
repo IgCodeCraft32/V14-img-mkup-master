@@ -19,10 +19,10 @@ function cPush() {
   cPushArray.push(document.getElementById("drawContainer").toDataURL());
 }
 
-window.onload = function () {
-  // nothing to do onload
-  // in Production "drawContainer" is not available at this time, so do not set up yet
-};
+// window.onload = function () {
+//   // nothing to do onload
+//   // in Production "drawContainer" is not available at this time, so do not set up yet
+// };
 var coord = { x: 0, y: 0 };
 
 function resize() {
@@ -35,6 +35,12 @@ function start(event, tool) {
     document
       .getElementById("drawContainer")
       .addEventListener("mousemove", drawFree);
+  if (tool == "line") {
+    startLine(event);
+    document
+      .getElementById("drawContainer")
+      .addEventListener("mousemove", drawLine);
+  }
   if (tool == "text") {
     return;
   }
@@ -47,6 +53,12 @@ function stop(event, tool, txt = "") {
     document
       .getElementById("drawContainer")
       .removeEventListener("mousemove", drawFree);
+  }
+  if (tool == "line") {
+    EndLine(event);
+    document
+      .getElementById("drawContainer")
+      .removeEventListener("mousemove", drawLine);
   }
   if (tool == "text") {
     ns.drawText(event, txt);
@@ -79,6 +91,49 @@ function drawFree(event) {
   ctx.stroke();
 }
 
+var start_point = null;
+
+function startLine(event) {
+  if (!isDrawing || !start_point) {
+    console.log("startLine");
+    reposition(event);
+    start_point = { ...coord };
+  }
+}
+
+function drawLine(event) {
+  if (isDrawing && start_point) {
+    var canvasPic = new Image();
+    canvasPic.src = cPushArray[cStep];
+    ctx.drawImage(canvasPic, 0, 0);
+
+    console.log("drawLine");
+    ctx.beginPath();
+    ctx.lineWidth = thick;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = lineColor;
+    ctx.moveTo(start_point.x, start_point.y);
+    reposition(event);
+    ctx.lineTo(coord.x, coord.y);
+    ctx.stroke();
+  }
+}
+
+function EndLine(event) {
+  if (isDrawing && start_point) {
+    console.log("EndLine");
+    ctx.beginPath();
+    ctx.lineWidth = thick;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = lineColor;
+    ctx.moveTo(start_point.x, start_point.y);
+    reposition(event);
+    ctx.lineTo(coord.x, coord.y);
+    ctx.stroke();
+
+    start_point = null;
+  }
+}
 window.ns = {
   undo: function () {
     if (cStep > 0) {
@@ -131,6 +186,7 @@ window.ns = {
   },
 
   setTool: function (tool, txt = "") {
+    console.log(tool, txt);
     this.removeEventListener();
     document
       .getElementById("drawContainer")

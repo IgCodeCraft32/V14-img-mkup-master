@@ -264,7 +264,7 @@ public class MainView extends VerticalLayout {
     thickPick.setMin(4);
     thickPick.setMax(16);
     thickPick.setStep(1);
-    thickPick.setHasControls(true);
+    // thickPick.setHasControls(true);
     thickPick.setValue(cfg.thicknessPx);
     thickPick.addValueChangeListener(evt->{
       int val = evt.getValue();
@@ -281,7 +281,7 @@ public class MainView extends VerticalLayout {
     fontSizePick.setMin(10);
     fontSizePick.setMax(70);
     fontSizePick.setStep(10);
-    fontSizePick.setHasControls(true);
+    // fontSizePick.setHasControls(true);
     fontSizePick.setValue(cfg.font_size);
     fontSizePick.addValueChangeListener(evt->{
       int val = evt.getValue();

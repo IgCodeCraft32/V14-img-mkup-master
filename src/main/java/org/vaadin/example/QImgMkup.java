@@ -1,6 +1,5 @@
 package org.vaadin.example;
 
-
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Div;
@@ -32,11 +31,12 @@ public class QImgMkup {
     private Div imgDiv = null;
 
     public enum Editor {
-        VIEW_ONLY,  // initial view - just show the image without any editing
+        VIEW_ONLY, // initial view - just show the image without any editing
         FREEFORM,
         CIRCLE,
         LINE,
-        TEXT}
+        TEXT
+    }
 
     public static class EditCfg {
         public String color = "red";
@@ -48,21 +48,22 @@ public class QImgMkup {
         public String txt = ""; //
     }
 
-    public QImgMkup() {}
+    public QImgMkup() {
+    }
 
-    public void setImage(String base64Img){
+    public void setImage(String base64Img) {
         int w = 1;
         int h = 1;
         dimension = getImageDimension(base64Img);
-        if (dimension!=null) {
+        if (dimension != null) {
             w = dimension.width;
             h = dimension.height;
-            if (imgDiv !=null) {
-                imgDiv.setWidth(""+w+"px");
-                imgDiv.setHeight(""+h+"px");
+            if (imgDiv != null) {
+                imgDiv.setWidth("" + w + "px");
+                imgDiv.setHeight("" + h + "px");
             }
         }
-        page.executeJs("ns.setImage($0, $1, $2)" , base64Img, w, h);
+        page.executeJs("ns.setImage($0, $1, $2)", base64Img, w, h);
     }
 
     public interface JpgReadyListener {
@@ -76,36 +77,36 @@ public class QImgMkup {
     }
 
     private void unregisterJpgReadyCallback(JpgReadyListener c) {
-        if (listeners.contains(c)) listeners.remove(c);
+        if (listeners.contains(c))
+            listeners.remove(c);
     }
 
     public void registerForUpdatedImg(JpgReadyListener c) {
         registerJpgReadyCallback(c);
         page.executeJs("return ns.getEditedJpg()").then(result -> {
-                String jpg = result.asString();
-                for (JpgReadyListener listener : listeners) {
-                    listener.jpgAsBase64Str(jpg);
-                }
-                unregisterJpgReadyCallback(c);
+            String jpg = result.asString();
+            for (JpgReadyListener listener : listeners) {
+                listener.jpgAsBase64Str(jpg);
             }
-        );
+            unregisterJpgReadyCallback(c);
+        });
     }
 
-    /** User clicked a button to choose an editor or line color/size.  */
+    /** User clicked a button to choose an editor or line color/size. */
     public void setEditCfg(EditCfg cfg) {
-        this.cfg=cfg;
+        this.cfg = cfg;
         String col = cfg.color;
         int thick = cfg.thicknessPx;
         int font_size = cfg.font_size;
-        page.executeJs("ns.setCfg($0,$1,$2)",col,thick,font_size);
+        page.executeJs("ns.setCfg($0,$1,$2)", col, thick, font_size);
     }
 
     public void addFreeform() {
-        page.executeJs("ns.setTool($0)","free");
+        page.executeJs("ns.setTool($0)", "free");
     }
 
     public void addText(String txt) {
-        page.executeJs("ns.setTool($0, $1)","text", txt);
+        page.executeJs("ns.setTool($0, $1)", "text", txt);
     }
 
     /** User clicked UNDO button once. */
@@ -121,20 +122,22 @@ public class QImgMkup {
     public Component getImgMkupEditor() {
         String canvas = "<canvas id='drawContainer' style='width: 100%;height: 100%;'></canvas>";
         imgDiv = new Div();
-        if (dimension==null) {
+        if (dimension == null) {
             imgDiv.setWidth("1px");
             imgDiv.setHeight("1px");
         } else {
-            imgDiv.setWidth(""+dimension.width+"px");
-            imgDiv.setHeight(""+dimension.height+"px");
+            imgDiv.setWidth("" + dimension.width + "px");
+            imgDiv.setHeight("" + dimension.height + "px");
         }
         imgDiv.add(new Html(canvas));
         return imgDiv;
     }
 
     private Dimension getImageDimension(String base64Str) {
-        if (base64Str==null) return null;
-        if (base64Str.isEmpty()) return null;
+        if (base64Str == null)
+            return null;
+        if (base64Str.isEmpty())
+            return null;
         if (base64Str.startsWith(MockDataSource.PREPEND_FOR_URL)) {
             base64Str = base64Str.substring(MockDataSource.PREPEND_FOR_URL.length());
         }
@@ -142,9 +145,9 @@ public class QImgMkup {
         try {
             byte[] decodedBytes = Base64.getDecoder().decode(base64Str);
             BufferedImage image = ImageIO.read(new ByteArrayInputStream(decodedBytes));
-            d = new Dimension(image.getWidth(),image.getHeight());
+            d = new Dimension(image.getWidth(), image.getHeight());
         } catch (Throwable th) {
-            System.out.println("th="+th);
+            System.out.println("th=" + th);
         }
         return d;
     }

@@ -262,7 +262,7 @@
   "Frontend/js/script.js"
  ],
  "frontendHashes": {
-  "js/script.js": "e8956a294d2f5ef6da5298cef35905da81f0363221b2791abfd806d4195d67ac",
+  "js/script.js": "8df73922898398f106e7311080e1cea1929e06e064e79d966f6001859be0486e",
   "buttonFunctions.js": "c852123f9b2c44eb75e555119d3e05a7dbe78b91d0ab616feb9df1654474707d",
   "comboBoxConnector.js": "1d004c3dae9c76f8bcc68678abe1b8f7bdc8b456f5c9c4c7f190df8ed25d66cd",
   "contextMenuConnector.js": "8960e00884b9a8b62e24be63e03fe7045dcb9b6844a8a238eb4619d5595e2cfc",
@@ -286,7 +286,7 @@
  },
  "themeJsonContents": {},
  "entryScripts": [
-  "VAADIN/build/indexhtml-67fbe561.js"
+  "VAADIN/build/indexhtml-824a103f.js"
  ],
  "webComponents": [],
  "cvdlModules": {
@@ -321,6 +321,6 @@
  },
  "packageJsonHash": "3f2cb25d441459cff453d5b0bca0e76bf6eaecfb28ba1ea058d962b733ad0a71",
  "indexHtmlGenerated": [
-  "  <script type=\"module\" crossorigin src=\"./VAADIN/build/indexhtml-67fbe561.js\"></script>"
+  "    <script type=\"module\" crossorigin src=\"./VAADIN/build/indexhtml-824a103f.js\"></script>"
  ]
 }

@@ -105,6 +105,14 @@ public class QImgMkup {
         page.executeJs("ns.setTool($0)", "free");
     }
 
+    public void addLiner() {
+        page.executeJs("ns.setTool($0)", "line");
+    }
+
+    public void addCircler() {
+        page.executeJs("ns.setTool($0)", "circle");
+    }
+
     public void addText(String txt) {
         page.executeJs("ns.setTool($0, $1)", "text", txt);
     }

@@ -18,3 +18,4 @@ webpack.generated.js
 
 #mis
 .save_image.txt
+src/main/dev-bundle/

@@ -176,15 +176,15 @@ public class MainView extends VerticalLayout {
   }
 
   private void launchCircleEditor() {
-    setTitle("Circle Editor TBD");
-    // workSpace.removeAll();
-    Notification.show("Circle Editor TBD", 2000, Notification.Position.MIDDLE);
+    System.out.println("launchCircleEditor ");
+    setTitle("Circle Editor");
+    qimgMkup.addLiner();
   }
 
   private void launchLineEditor() {
-    setTitle("Line Editor TBD");
-    // workSpace.removeAll();
-    Notification.show("Line Editor TBD", 2000, Notification.Position.MIDDLE);
+    System.out.println("launchLineEditor ");
+    setTitle("Line Editor");
+    qimgMkup.addCircler();
   }
 
   private void launchTextEditor() {
